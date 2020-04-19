@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/nportas/tweeter/domain"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestTextTweetPrintsUserAndText(t *testing.T) {
@@ -16,10 +17,7 @@ func TestTextTweetPrintsUserAndText(t *testing.T) {
 
 	// Validation
 	expectedText := "@womenwhogo: This is my tweet"
-	if text != expectedText {
-		t.Errorf("The expected text is %s but was %s", expectedText, text)
-	}
-
+	assert.Equal(t, expectedText, text)
 }
 
 func TestCanGetAStringFromATweet(t *testing.T) {
@@ -32,8 +30,5 @@ func TestCanGetAStringFromATweet(t *testing.T) {
 
 	// Validation
 	expectedText := "@womenwhogo: This is my tweet"
-	if text != expectedText {
-		t.Errorf("The expected text is %s but was %s", expectedText, text)
-	}
-
+	assert.Equal(t, expectedText, text)
 }
