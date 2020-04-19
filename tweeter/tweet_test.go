@@ -1,16 +1,16 @@
-package domain_test
+package tweeter_test
 
 import (
 	"testing"
 
-	"github.com/nportas/tweeter/domain"
+	"github.com/nportas/tweeter-godog-example/tweeter"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestTextTweetPrintsUserAndText(t *testing.T) {
 
 	// Initialization
-	tweet := domain.NewTextTweet("womenwhogo", "This is my tweet")
+	tweet := tweeter.NewTextTweet("womenwhogo", "This is my tweet")
 
 	// Operation
 	text := tweet.PrintableTweet()
@@ -23,7 +23,7 @@ func TestTextTweetPrintsUserAndText(t *testing.T) {
 func TestCanGetAStringFromATweet(t *testing.T) {
 
 	// Initialization
-	tweet := domain.NewTextTweet("womenwhogo", "This is my tweet")
+	tweet := tweeter.NewTextTweet("womenwhogo", "This is my tweet")
 
 	// Operation
 	text := tweet.String()

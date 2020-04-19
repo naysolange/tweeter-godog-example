@@ -1,4 +1,4 @@
-module github.com/nportas/tweeter
+module github.com/nportas/tweeter-godog-example
 
 go 1.14
 

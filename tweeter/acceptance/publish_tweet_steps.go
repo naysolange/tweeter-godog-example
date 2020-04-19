@@ -8,25 +8,23 @@ import (
 	"net/http"
 
 	"github.com/cucumber/messages-go/v10"
-	"github.com/nportas/tweeter/domain"
-	"github.com/nportas/tweeter/rest"
-	"github.com/nportas/tweeter/service"
+	"github.com/nportas/tweeter-godog-example/tweeter"
 )
 
 type AcceptanceContext struct {
-	tweeterManager *service.TweeterManager
-	publishedTweet domain.Tweet
+	manager        *tweeter.Manager
+	publishedTweet tweeter.Tweet
 }
 
 func (ac *AcceptanceContext) InitializeContext(scenario *messages.Pickle) {
 
 	// Create the manager
-	tweeterManager := service.NewTweeterManager()
-	ac.tweeterManager = tweeterManager
+	manager := tweeter.NewManager()
+	ac.manager = manager
 
 	// Run the server
-	ginServer := rest.NewGinServer(tweeterManager)
-	ginServer.StartGinServer()
+	ginServer := tweeter.NewGinServer(manager)
+	ginServer.Start()
 }
 
 func (ac *AcceptanceContext) theUserExists(username string) error {
@@ -54,7 +52,7 @@ func (ac *AcceptanceContext) theUserNeverHasTweeted(username string) error {
 func (ac *AcceptanceContext) theUserSendATweet(username, text string) error {
 
 	// Create body with a tweet
-	tweet := domain.NewTextTweet(username, text)
+	tweet := tweeter.NewTextTweet(username, text)
 	body, _ := json.Marshal(tweet)
 
 	// Send POST
@@ -78,7 +76,7 @@ func (ac *AcceptanceContext) theTweetIsInTimeline(username, expectedText string)
 	}
 
 	// Validate published tweet against expected tweet
-	textTweets := []domain.TextTweet{}
+	textTweets := []tweeter.TextTweet{}
 	body, _ := ioutil.ReadAll(res.Body)
 	errUnmarshal := json.Unmarshal(body, &textTweets)
 
