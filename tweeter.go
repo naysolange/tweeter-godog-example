@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	tweetManager := service.NewTweetManager()
+	tweetManager := service.NewTweeterManager()
 
 	ginServer := rest.NewGinServer(tweetManager)
 	ginServer.StartGinServer()
